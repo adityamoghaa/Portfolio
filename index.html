@@ -1336,17 +1336,43 @@
     });
 
     // Contact Form
-    document.getElementById('contactForm').addEventListener('submit', function (e) {
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
       e.preventDefault();
+      
+      const form = e.target;
       const name = document.getElementById('contactName').value.trim();
       const email = document.getElementById('contactEmail').value.trim();
       const msg = document.getElementById('contactMsg').value.trim();
+      
+      // Basic validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!name || !email || !msg) { showToast('Please fill in all fields.'); return; }
-      const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-      const body = encodeURIComponent(`Hi Aditya,\n\n${msg}\n\n— ${name} (${email})`);
-      window.location.href = `mailto:adityamoghaa@gmail.com?subject=${subject}&body=${body}`;
-      showToast('Opening your email client…');
-      this.reset();
+      if (!emailRegex.test(email)) { showToast('Please enter a valid email address.'); return; }
+      
+      const button = document.getElementById('submitButton');
+      button.textContent = 'TRANSMITTING...';
+      button.disabled = true;
+
+      const formData = new FormData(form);
+      
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+        
+        if (response.ok) {
+          showToast('✓ Transmission received successfully');
+          form.reset();
+        } else {
+          showToast('Transmission failed. Please try again.');
+        }
+      } catch (error) {
+        showToast('Transmission failed. Please try again.');
+      } finally {
+        button.textContent = 'Send Transmission';
+        button.disabled = false;
+      }
     });
   </script>
 </body>
