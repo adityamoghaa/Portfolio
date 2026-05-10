@@ -1095,24 +1095,26 @@
         </div>
         <div class="glass-card p-8 md:p-10 rounded-2xl">
           <form class="space-y-8" id="contactForm">
+            <input type="hidden" name="access_key" value="aa2758e8-f0ed-46fe-8348-114cf77d22b6">
             <div>
               <label class="text-[10px] font-label font-bold uppercase tracking-widest block mb-2" for="contactName"
                 style="color:var(--dim);">Your Name</label>
-              <input class="form-input" id="contactName" type="text" placeholder="John Doe" />
+              <input class="form-input" id="contactName" name="name" type="text" placeholder="Suresh Chand" required />
             </div>
             <div>
               <label class="text-[10px] font-label font-bold uppercase tracking-widest block mb-2" for="contactEmail"
                 style="color:var(--dim);">Your Email</label>
-              <input class="form-input" id="contactEmail" type="email" placeholder="john@example.com" />
+              <input class="form-input" id="contactEmail" name="email" type="email" placeholder="suresh@example.com"
+                required />
             </div>
             <div>
               <label class="text-[10px] font-label font-bold uppercase tracking-widest block mb-2" for="contactMsg"
                 style="color:var(--dim);">Message</label>
-              <textarea class="form-input resize-none" id="contactMsg" rows="4"
-                placeholder="Tell me about your project..."></textarea>
+              <textarea class="form-input resize-none" id="contactMsg" name="message" rows="4"
+                placeholder="Tell me about your project..." required></textarea>
             </div>
-            <button type="submit"
-              class="w-full font-headline font-bold uppercase tracking-widest py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            <button type="submit" id="submitButton"
+              class="w-full font-headline font-bold uppercase tracking-widest py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
               style="background:linear-gradient(to right, var(--copper), var(--copper-dark)); color:#fff; box-shadow: 0 0 20px rgba(201,125,61,0.2);">
               Send Transmission
             </button>
